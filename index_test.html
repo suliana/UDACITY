@@ -1,0 +1,125 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div>
+		<input type="file" id="file" />
+	</div>
+	<div id="image-container">
+		<canvas id="c" width="500" height="500"></canvas>
+		<div>
+			<span>Top Line:</span> <br/>
+			<input id="topLineText" type="text"><br/>
+			<span>Bottom Line:</span> <br/>
+			<input id="bottomLineText" type="text"><br/>
+			<button type="saveBtn">Save</button>
+		</div>
+	</div>
+
+	<script>
+		function textChangeListener (evt){
+			var id = evt.target.id;
+			var text = evt.target.value;
+			if (id =="topLineText"){
+				window.topLineText = text;
+			}else{
+				window.bottomLineText = text;
+			}
+			redrawMeme(window.imageSrc, window.topLineText, window.bottomLineText)
+
+		}
+
+		function redrawMeme(image, topLine, bottomLine){
+			//Get the canvas 2d Context
+			var canvas = document.querySelector("canvas");
+			var ctx = c.getContext("2d");
+			//Your code goes here
+		}
+		function saveFile(){
+			window.open(document.querySelector('canvas').toDataURL());
+		}
+		function handleFileSelect(evt){
+			var canvasWidth= 500;
+			var canvasHeight = 500;
+			var file = evt.taget.files[0];
+
+			var reader = new FileReader();
+			reader.onload = function (fileObject){
+				var data = fileObject.target.result;
+
+				//Create an image Object
+				var image = new Image();
+				image.onload = function() {
+					window.imageSrc = this;
+					redrawMeme(window.imageSrc, null, null);
+				}
+				//Set image data to the background image
+				image.src = data;
+				console.log('Loaded image');
+				console.log(fileObject.target.result);
+
+			};
+			reader.readAsDataURL(file)
+		}
+		/*var c = document.querySelector("#c");
+		var ctx = c.getContext("2d");*/
+		/*ctx.fillStyle = "blue";
+		// Start at (0,0) and draw a 50px x 50px blue rectangle.
+		ctx.fillRect(0,0,50,50);
+		// Start at (0,0) and clear a 25px x 25px rectangle.
+		ctx.clearRect(0,0,25,25);*/
+
+		//ctx.fillRect  (100, 100, 100, 100);
+
+
+
+/*
+		var image = new Image();
+		image.onload = function() {
+			console.log('Loaded image');
+			ctx.drawImage(image, 0, 0, c.width, c.height);
+		}
+
+		image.src = "diff-strokes.jpg ";*/
+		/*var saveIamge =c.toDataURL();
+		window.open(saveIamge);*/
+
+		/*ctx.strokeStyle = "#33CC33"
+		ctx.strokeRect(50, 50, 100, 100);
+
+		ctx.beginPath();
+		ctx.moveTo(75,75);
+		ctx.lineTo(125,125);
+		ctx.lineTo(125,75);
+
+		//ctx.lineTo(75,75);
+		ctx.fillStyle = "pink"
+
+		ctx.fill();
+		//ctx.stroke();
+		ctx.strokeText("Whatchoo talking bout!", 50, 10);*/
+
+		/*ctx.font = "36pt Impact";
+		ctx.textAlign = "center";
+
+		ctx.fillStyle = "white";
+		ctx.fillText("CANVAS MEMES!", c.width /2, 40);
+
+		ctx.strokeStyle = "black" ;
+		ctx.lineWidth = 3 ;
+		ctx.strokeText("CANVAS MEMES!", c.width /2, 40);
+
+*/
+
+
+	</script>
+
+</body>
+</html>

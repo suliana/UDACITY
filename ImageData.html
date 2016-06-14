@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+	<div id="image-container">
+		<canvas id="c" width="500" height="500"></canvas>
+	</div>
+
+	<script>
+
+		var canvas = document.querySelector("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var pix = ctx.getImageData(0,0,500,500);
+		//Get ImageData object
+        var paintGreen = function(imageData){
+            var numPixels = imageData.data.length;
+            for (var i=0; i<numPixels; i++) {
+                if (i%10 === 0){
+                    imageData.data[i * 4 + 1] = 255;
+                    imageData.data[i * 4 + 3] = 255;
+                }
+
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+        paintGreen(pix);
+	</script>
+
+</body>
+</html>
